@@ -1,3 +1,5 @@
+# Configuration LACP/Bonding Linux
+
 ### Table des matières
 * Contexte
 * Prérequis

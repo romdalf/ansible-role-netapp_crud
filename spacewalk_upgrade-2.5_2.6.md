@@ -1,9 +1,12 @@
-# Mise-à-jour de Spacewwalk 
+# Mise-à-jour de Spacewwalk 2.5 à 2.6
 
 ### Table des matières
 * Contexte
 * Prérequis
 * Configuration 
+* Sauvegarde de la configration
+* Mise-à-jour système
+* Mise-à-jour de spacewalk et de ces services
 
 ### Contexte
 Lors de la montée de version pour des raisons de fonctionnalités ou maintenance du produit spacewalk (outil de gestion des systèmes linux), il est 

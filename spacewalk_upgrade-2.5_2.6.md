@@ -338,5 +338,48 @@ Done.
 [root@si5148v yum.repos.d]#
 ```
 
+Fixer la version du package c3p0 via le repo jpackage
+```
+[root@si5148v ~]# yum --showduplicates list c3p0
+[root@si5148v ~]# yum install c3p0-0.9.1.2-2.jpp5
+[root@si5148v ~]# yum remove c3p0-0.9.2.1-6.el7
+[root@si5148v ~]# yum downgrade c3p0-0.9.1.2-2.jpp5
+```
+
+Resoudre le changement de schema de jabberd l'empêchant de redémarrer proprement
+```
+[root@si5148v ~]# cd /var/lib/jabberd/
+[root@si5148v ~]# rm -rf *
+```
+
+Redémarrer tous les services:
+```
+[root@si5148v yum.repos.d]# systemctl daemon-reload
+[root@si5148v yum.repos.d]# /usr/sbin/spacewalk-service restart
+Shutting down spacewalk services...
+Redirecting to /bin/systemctl stop taskomatic.service
+Stopping cobblerd (via systemctl):                         [  OK  ]
+Redirecting to /bin/systemctl stop rhn-search.service
+Redirecting to /bin/systemctl stop osa-dispatcher.service
+Redirecting to /bin/systemctl stop httpd.service
+Redirecting to /bin/systemctl stop tomcat.service
+Redirecting to /bin/systemctl stop jabberd.service
+Redirecting to /bin/systemctl stop postgresql.service
+Done.
+Starting spacewalk services...
+Redirecting to /bin/systemctl start postgresql.service
+Redirecting to /bin/systemctl start jabberd.service
+Redirecting to /bin/systemctl start tomcat.service
+Waiting for tomcat to be ready ...
+Redirecting to /bin/systemctl start httpd.service
+Redirecting to /bin/systemctl start osa-dispatcher.service
+Job for osa-dispatcher.service failed because the control process exited with error code. See "systemctl status osa-dispatcher.service" and "journalctl -xe" for details.
+Redirecting to /bin/systemctl start rhn-search.service
+Starting cobblerd (via systemctl):                         [  OK  ]
+Redirecting to /bin/systemctl start taskomatic.service
+Done.
+[root@si5148v yum.repos.d]#
+```
+
 Se connecter sur spacewalk et vérifier que tout va bien.
 

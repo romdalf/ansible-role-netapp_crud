@@ -11,7 +11,7 @@ volsize: "{{ (lunsize*1.2)|int}}"
 comment: CRQ_TOTO				# volize  = volume size in gb
 
 ## lun info
-lunname: "{{ volname }}.lun"		# name of the lun is generally the volume + .lun
+lunname: "{{ volname }}.lun"  # name of the lun is generally the volume + .lun
 #lunname: xxxx.lun			# if different comment previous entry and complete this one
 lunsize: 1
 ostype: vmware 				# {windows, linux, vmware}

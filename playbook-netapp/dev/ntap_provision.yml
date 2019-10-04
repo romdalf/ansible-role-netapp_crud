@@ -5,12 +5,14 @@
   tasks:
   - include_vars:
       dir: tasks/vars
+      depth: 1 
       files_matching:
-        - "{{ site }}.yml"
+        - tasks/vars/cap.yml
   - include_vars:
       dir: tasks/inputs
+      depth: 1 
       files_matching: 
-        - "{{ input }}.yml"
+        - tasks/inputs/"{{ input }}.yml"
 
   - name: Gathering aggregate vfiler volume info
     include_tasks: tasks/ntap_facts.yml

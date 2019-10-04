@@ -7,6 +7,6 @@ dlun: vs13-cap1-san-dr
 vora: vs04-cap1-san-ora
 cluster: 10.24.128.70 
 user: admin 
-pass: san100rien
+pass: 
 
 

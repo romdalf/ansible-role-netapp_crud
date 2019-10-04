@@ -6,30 +6,22 @@ Currently, these are not roles but they will eventually move to when I have time
 The structure of the repository looks like this when cloned:
 
 ```
-ansible_netapp
-|-dev
-|---inputs
-|   |-nas-inputs.yml
-|   |-san-inputs.yml
-|---vars
-|   |-inventory.yml
-|-playbook_files01.yml
-|-playbook_files02.yml
-|-playbook_files0x.yml
-|-prd
-|---inputs
-|   |-nas-inputs.yml
-|   |-san-inputs.yml
-|---vars
-|   |-inventory.yml
-|-playbook_files01.yml
-|-playbook_files02.yml
-|-playbook_files0x.yml
+playbook-netapp
+|---dev
+    |---sandbox
+    |---tasks
+        |---inputs
+            |---templates
+        |---vars
+|---ntap_provision.yml
+
 ```
  
 - `dev`: contains playbooks currently in development and should not be used against production systems.
-- `prd`: contains playbooks to be run against production systems
-- `inputs`: contains user inputs like name, size, ... loaded in the playbook to create/delete objects
+- `sandbox`: old playbooks to be converted 
+- `tasks`: playbook files containing one tasks only to be reused with a master playbook
+- `inputs`: contains files about user inputs like name, size, ... 
+- `template`: template to use to create a volume, lun, nfs export, smb share
 - `vars`: contains inventory files
 
 Note: if you include credentials in the inventory file, it is strongly adviced to encrypt the file for obvious security reasons.

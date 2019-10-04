@@ -57,7 +57,6 @@
      volume_security_style: unix 
      state: "{{ state }}"
      comment: "{{ comment }}"
-    register: result
     with_nested:
     - "{{ ontap_facts.vserver_info[lookup('vars','vlun')].aggr_list.aggr_name }}"
     - "{{ ontap_facts.aggregate_info }}"

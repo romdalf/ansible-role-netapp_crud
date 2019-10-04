@@ -1,0 +1,13 @@
+- tasks:
+  - name: NTAP - LUN mapping activity
+    na_ontap_lun_map:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     vserver: "{{ vlun }}"
+     path: "/vol/{{ volname }}/{{ lunname }}"
+     initiator_group_name: "{{ item }}"
+     state: "{{ state }}"
+    with_items: "{{ igroups }}"
+    register: result
+

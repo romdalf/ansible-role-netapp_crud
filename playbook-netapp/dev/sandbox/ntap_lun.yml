@@ -1,0 +1,67 @@
+- hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+   ntap:
+    cluster: 10.24.128.70
+    user: admin
+    pass: san100rien
+    vserver: vs03-cap1-san
+
+  tasks:
+  - name: NTAP - Volume Activity
+    na_ontap_volume:
+     hostname: "{{ ntap.cluster }}"
+     username: "{{ ntap.user }}"
+     password: "{{ ntap.pass }}"
+     vserver: "{{ ntap.vserver }}"
+     name: vs03_cap1_esx6_gold_13 
+     junction_path: /vs03_cap1_esx6_gold_13
+     is_infinite: False
+     aggregate_name: n05_cap1_ssd 
+     size: 5
+     size_unit: tb 
+     space_guarantee: none
+     efficiency_policy: vs03_ve_daily_3 
+     percent_snapshot_space: 0
+     type: RW 
+     volume_security_style: unix
+     state: "{{ state }}"
+
+  - name: NTAP - LUN activity
+    na_ontap_lun:
+     hostname: "{{ ntap.cluster }}"
+     username: "{{ ntap.user }}"
+     password: "{{ ntap.pass }}"
+     vserver: "{{ ntap.vserver }}"
+     name: vs03_cap1_esx6_gold_13.lun
+     flexvol_name: vs03_cap1_esx6_gold_13
+     ostype: vmware
+     size: 4
+     size_unit: tb
+     space_reserve: false
+     space_allocation: false
+     state: "{{ state }}"
+
+  - name: NTAP - LUN mapping activity
+    na_ontap_lun_map:
+     hostname: "{{ ntap.cluster }}"
+     username: "{{ ntap.user }}"
+     password: "{{ ntap.pass }}"
+     vserver: "{{ ntap.vserver }}"
+     path: /vol/vs03_cap1_esx6_gold_13/vs03_cap1_esx6_gold_13.lun
+     initiator_group_name: vs03_ig_esx6_fcp 
+     state: "{{ state }}"
+
+  - name: NTAP - LUN mapping activity
+    na_ontap_lun_map:
+     hostname: "{{ ntap.cluster }}"
+     username: "{{ ntap.user }}"
+     password: "{{ ntap.pass }}"
+     vserver: "{{ ntap.vserver }}"
+     path: /vol/vs03_cap1_esx6_gold_13/vs03_cap1_esx6_gold_13.lun
+     initiator_group_name: vs03_ig_commvault_fcp
+     state: "{{ state }}"
+
+

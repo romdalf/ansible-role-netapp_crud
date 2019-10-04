@@ -1,0 +1,49 @@
+# User Input Template
+# 20191004 
+#
+# If multiple objects need to be created, use the pattern [object1,object2,object3,...]  
+# Example: [vs04_cap1_st5400_o01,vs04_cap1_st5400_o02,vs04_cap1_st5400_o03]
+#
+
+# site
+site: cap				# { cap, perex } 
+
+## volume info
+volname: moncu 				# volname = name of the volume
+lunsize: 1                              # lunsize = size of the requested LUN 
+ostype: vmware 				# {windows, linux, vmware}
+
+## igroups
+igroups: [vs03_ig_esx6_fcp,vs03_ig_commvault_fcp] 	# for datastore with commvault access
+#igroups: vs03_ig_esx6_fcp				# for datastore with commvault access
+
+## storage disk class {sata, sas, ssd}
+disktype: sata				# {sas, sata, ssd} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# don't change/modify
+provtype: san
+volsize: "{{ (lunsize*1.2)|int}}"       # volize  = volume size in gb
+lunname: "{{ volname }}.lun"            # name of the lun is generally the volume + .lun
+maxpercentused: 80
+

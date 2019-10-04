@@ -1,0 +1,34 @@
+- hosts: all 
+  gather_facts: false
+  connection: local
+
+  vars: 
+    file: 
+      - "tasks/vars/vars-{{ site }}.yml"
+
+  tasks:
+  - include_vars:
+      dir: tasks/inputs
+      files_matching: "{{ input }}"
+
+  - name: Provisioning tasks
+    include_tasks: tasks/ntap_facts.yml
+    include_tasks: tasks/ntap_vol.yml 
+
+  # if SAN 
+    include_tasks: tasks/ntap_lun.yml
+    when: 
+      - provtype == 'san'
+
+    include_tasks: tasks/ntap_lunmap.yml
+    when: 
+      - provtype == 'san'
+
+  # if NAS
+    include_tasks: tasks/ntap_qtree.yml
+    when: 
+      - qtreename  != ''
+    include_tasks: tasks/ntap_smb.yml
+    when: 
+      - provtype  == 'nas'
+

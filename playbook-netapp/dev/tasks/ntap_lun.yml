@@ -1,0 +1,19 @@
+- tasks:
+  - name: NTAP - LUN activity
+    na_ontap_lun:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     vserver: "{{ vlun }}"
+     name: "{{ lunname }}"
+     flexvol_name: "{{ volname }}"
+     ostype: "{{ ostype }}"
+     size: "{{ lunsize }}"
+     size_unit: gb
+     space_reserve: false
+     space_allocation: false
+     state: "{{ state }}"
+    register: result
+
+
+

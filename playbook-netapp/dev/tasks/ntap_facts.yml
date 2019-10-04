@@ -1,0 +1,12 @@
+  - name: NTAP - Gather Facts to elect aggregate based on vserver aggr list
+    na_ontap_gather_facts:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     state: info
+     validate_certs: false
+     gather_subset:
+       - aggregate_info
+       - vserver_info
+       - volume_info
+

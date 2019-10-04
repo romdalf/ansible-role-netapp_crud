@@ -1,0 +1,66 @@
+- hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+    site: "{{ site }}"
+
+  tasks:
+  - include_vars: 
+      dir: vars
+      files_matching: vars-cap.yml
+    when: site  == 'cap'
+  - include_vars:
+      dir: vars
+      files_matching: vars-perex.yml
+    when: site == 'perex'
+  - include_vars:
+      dir: inputs 
+      files_matching: user-inputs.yml
+    
+
+  - name: NTAP - Gather Facts to elect aggregate based on vserver aggr list
+    na_ontap_gather_facts:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     state: info
+     validate_certs: false
+     gather_subset: 
+       - aggregate_info
+       - vserver_info
+
+#  - name: test variables
+#    debug: var=cluster
+
+
+  - name: NTAP - Volume Activity
+    na_ontap_volume:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     vserver: "{{ vlun }}"
+     name: "{{ volname }}" 
+     is_infinite: False
+     aggregate_name: "{{ item.1 }}" 
+     size: "{{ volsize }}"
+     size_unit: gb
+     space_guarantee: none
+#     efficiency_policy: "{{ deduppolicy }}" 
+     percent_snapshot_space: 0
+     type: RW 
+     volume_security_style: unix 
+     state: "{{ state }}"
+    register: result
+    with_nested:
+    - "{{ ontap_facts.vserver_info[lookup('vars','vlun')].aggr_list.aggr_name }}"
+    - "{{ ontap_facts.aggregate_info }}"
+    when:
+    - item.1.find("root") == -1
+#    - item.1.find("sas") == -1
+#    - item.1.find("ssd") == -1
+    - item.1.find("{{ disktype }}") != -1
+    - "{{ ontap_facts.aggregate_info[item.0].aggr_space_attributes.percent_used_capacity | int }} < {{ maxpercentused }}"
+    - result is not defined or result.rc != 0
+    ignore_errors: yes
+

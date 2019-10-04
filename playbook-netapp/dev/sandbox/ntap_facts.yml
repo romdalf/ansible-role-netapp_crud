@@ -1,0 +1,38 @@
+- hosts: all
+  gather_facts: false
+  connection: local
+
+#  vars:
+#    site: "{{ site }}"
+
+  tasks:
+#  - include_vars:
+#      dir: inputs
+#      files_matching: san-inputs.yml
+
+  - include_vars:
+      dir: vars
+      files_matching: vars-cap.yml
+    when: site  == 'cap'
+  - include_vars:
+      dir: vars
+      files_matching: vars-perex.yml
+    when: site == 'perex'
+
+  - include_vars:
+      dir: vars
+      files_matching: vars-lab.yml
+    when: site == 'lab'
+
+  - name: NTAP - Gather Facts to elect aggregate based on vserver aggr list
+    na_ontap_gather_facts:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     state: info
+     validate_certs: false
+     gather_subset:
+#       - aggregate_info
+#       - vserver_info
+       - volume_info
+

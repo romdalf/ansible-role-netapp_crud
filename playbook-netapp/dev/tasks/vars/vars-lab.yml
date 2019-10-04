@@ -1,0 +1,6 @@
+mb: vs01-lab1-cifs
+vlun: vs03-lab1-san
+cluster: 10.24.128.190
+user: admin
+pass: san100rien
+

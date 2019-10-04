@@ -1,0 +1,59 @@
+- hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+   ntap:
+    user: admin
+    vserver: "{{ vserver }}"
+    vserverdr: "{{ vserverdr }}" 
+  vars_files:
+   ntappasswd.yml
+
+  tasks:
+  - name: NTAP - Gather Facts  
+    na_ontap_gather_facts:
+     hostname: "{{ clusterdr }}"
+     username: "{{ ntap.user }}"
+     password: "{{ ntappasswd }}"
+     state: info
+     validate_certs: false
+
+  - name: NTAP - DR Volume Activity
+    na_ontap_volume:
+     hostname: "{{ clusterdr }}"
+     username: "{{ ntap.user }}"
+     password: "{{ ntappasswd }}"
+     validate_certs: false
+     vserver: "{{ ntap.vserverdr }}"
+     aggregate_name: "{{ item }}"
+     name: "{{ volnamedr }}"
+     size: 20
+     size_unit: mb
+     type: DP
+     state: "{{ state }}"
+    register: volresult
+    with_items: "{{ ontap_facts.aggregate_info }}"
+    when: 
+    - item.find("root") == -1
+    - item.find("ssd") == -1
+    - item.find("sas") == -1
+    - "{{ ontap_facts.aggregate_info[item].aggr_space_attributes.percent_used_capacity | int }} < {{ maxpercentused }}" 
+    - volresult is not defined or volresult.rc != 0
+    ignore_errors: yes
+
+  - name: NTAP - SnapMirror Activity
+    na_ontap_snapmirror:
+     hostname: "{{ clusterdr }}"
+     username: "{{ ntap.user }}"
+     password: "{{ ntappasswd }}"
+     validate_certs: false
+     source_vserver: "{{ ntap.vserver }}"
+     source_volume: "{{ volname }}"
+     destination_vserver: "{{ ntap.vserverdr }}"
+     destination_volume: "{{ volnamedr }}"
+     state: "{{ state }}"
+     relationship_type: data_protection
+    register: drresult
+     
+

@@ -1,0 +1,27 @@
+# site
+site: cap				# { cap, perex } 
+
+## create or delete object
+#state: present				# present = create or absent = delete
+state: absent
+
+## volume info
+volname: moncu 				# volname = name of the volume
+volsize: 1				# volize  = volume size in gb
+
+## lun info
+lunname: "{{ volname }}.lun"		# name of the lun is generally the volume + .lun
+#lunname: xxxx.lun			# if different comment previous entry and complete this one
+lunsize: 1 
+ostype: vmware 				# {windows, linux, vmware}
+
+## igroups
+igroups: [vs03_ig_esx6_fcp,vs03_ig_commvault_fcp] 	# for datastore with commvault access
+#igroups: vs03_ig_esx6_fcp				# for datastore with commvault access
+
+## storage disk class {sata, sas, ssd}
+disktype: sata				# {sas, sata, ssd} 
+
+## aggregate capacity management 
+maxpercentused: 80
+

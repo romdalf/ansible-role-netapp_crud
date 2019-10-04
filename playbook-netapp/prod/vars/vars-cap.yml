@@ -1,0 +1,11 @@
+vsmb: vs01-cap1-cifs
+dsmb: vs11-cap1-cifs-dr
+vnfs: vs02-cap1-nfs
+dnfs: vs12-cap1-nfs-dr
+vlun: vs03-cap1-san
+dlun: vs13-cap1-san-dr
+cluster: 10.24.128.70 
+user: admin 
+pass: san100rien
+
+

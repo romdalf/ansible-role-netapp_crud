@@ -26,7 +26,7 @@ disktype: sata                                      # {sas, sata, ssd}
 
 #-------------------------------------------------------------------------------------------#
 # don't change/modify
-provtype: san
+provtype: ora
 volsize: "{{ (lunsize*1.2)|int}}"                   # volize  = volume size in gb
 lunname: "{{ volname }}.lun"                        # lunname = volname + .lun as a standard
 maxpercentused: 85

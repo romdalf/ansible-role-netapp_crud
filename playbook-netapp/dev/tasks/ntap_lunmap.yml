@@ -1,4 +1,3 @@
-- tasks:
   - name: NTAP - LUN mapping activity
     na_ontap_lun_map:
      hostname: "{{ cluster }}"

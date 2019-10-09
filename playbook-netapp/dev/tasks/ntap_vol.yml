@@ -26,3 +26,8 @@
     - result is not defined or result.rc != 0
     ignore_errors: yes
 
+
+
+# TODO:
+# - if aggregate is not SSD run a routing to get all the dedup policy/avi_schedule
+#   and assign one 

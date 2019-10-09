@@ -4,23 +4,22 @@
 
   tasks:
   - include_vars:
-      dir: tasks/vars
-      depth: 1 
-      files_matching:
-        - tasks/vars/cap.yml
-  - include_vars:
       dir: tasks/inputs
-      depth: 1 
-      files_matching: 
-        - tasks/inputs/"{{ input }}.yml"
+      files_matching: "{{ input }}.yml"
+  - include_vars:
+      dir: tasks/vars
+      files_matching: "{{ site }}.yml"
 
   - name: Gathering aggregate vfiler volume info
     include_tasks: tasks/ntap_facts.yml
 
-#  # create volume 
-#  - name: Create volume 
-#    include_tasks: tasks/ntap_vol.yml 
-#
+  # create volume 
+  - name: Create volume 
+    include_tasks: tasks/ntap_vol.yml 
+    vars: 
+      - vserver == "{{ vlun }}"
+    when: provtype == 'san' and ostype == 'vmware' 
+
 #  # if SAN 
 #  - name: Create LUN(s)
 #    include_tasks: tasks/ntap_lun.yml

@@ -26,7 +26,7 @@ disktype: sata                                      # {sata=bronze, sas=silver, 
 # don't change/modify
 provtype: san
 volsize: "{{ (qtreesize*1.2)|int}}"                   # volize  = volume size in gb
-juncpath: "{{ volname }}.lun"                       # 
+juncpath: "/{{ volname }}"                            # 
 maxpercentused: 85
 #-------------------------------------------------------------------------------------------#
 

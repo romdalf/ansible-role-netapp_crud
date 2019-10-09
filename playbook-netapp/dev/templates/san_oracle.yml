@@ -1,0 +1,34 @@
+# User Input Template
+# 2019 - romuald@redhat.com
+#
+# If multiple objects need to be created, use the pattern [object1,object2,object3,...]  
+# Example: [vs04_cap1_st5400_o01,vs04_cap1_st5400_o02,vs04_cap1_st5400_o03]
+#
+
+#-------------------------------------------------------------------------------------------#
+# Modify to your needs
+#-------------------------------------------------------------------------------------------#
+# site
+site: cap                                           # { cap, perex } 
+
+## volume info
+volname: vs04_cap1_[hostname]_o0x                   # volname = name of the volume(s)
+lunsize: 1                                          # lunsize = size(s) of the requested LUN 
+ostype: linux                                       # {linux, vmware, windows}
+
+## igroups
+igroups: vs04_ora_[hostname]                        # igroups = host ports allowed access
+
+## storage disk class {sata, sas, ssd}
+disktype: sata                                      # {sas, sata, ssd} 
+#-------------------------------------------------------------------------------------------#
+
+
+#-------------------------------------------------------------------------------------------#
+# don't change/modify
+provtype: ora
+volsize: "{{ (lunsize*1.2)|int}}"                   # volize  = volume size in gb
+lunname: "{{ volname }}.lun"                        # lunname = volname + .lun as a standard
+maxpercentused: 85
+#-------------------------------------------------------------------------------------------#
+

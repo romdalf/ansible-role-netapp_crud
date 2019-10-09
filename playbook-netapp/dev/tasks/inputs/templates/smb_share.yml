@@ -1,5 +1,5 @@
 # User Input Template
-# 20191004 - romuald@redhat.com
+# 2019 - romuald@redhat.com
 #
 # If multiple objects need to be created, use the pattern [object1,object2,object3,...]  
 # Example: [vs04_cap1_st5400_o01,vs04_cap1_st5400_o02,vs04_cap1_st5400_o03]

@@ -30,7 +30,7 @@ disktype: sata                                      # {sas, sata, ssd}
 #-------------------------------------------------------------------------------------------#
 # don't change/modify
 provtype: san
-volsize: "{{ (lunsize*1.2)|int}}"                   # volize  = volume size in gb
+volsize: "{{ (lunsize*1024*120/100)|int}}"                   # volize  = volume size in gb
 lunname: "{{ volname }}.lun"                        # lunname = volname + .lun as a standard
 maxpercentused: 85
 #-------------------------------------------------------------------------------------------#

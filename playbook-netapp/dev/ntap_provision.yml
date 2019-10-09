@@ -18,14 +18,32 @@
     include_tasks: tasks/ntap_vol.yml 
     vars: 
       - vserver == "{{ vlun }}"
-    when: provtype == 'san' and ostype == 'vmware' 
+    when: provtype == 'san'
 
-#  # if SAN 
-#  - name: Create LUN(s)
-#    include_tasks: tasks/ntap_lun.yml
-#    when: 
-#      - provtype == 'san'
-#
+  - name: Create volume 
+    include_tasks: tasks/ntap_vol.yml 
+    vars: 
+      - vserver == "{{ vora }}"
+    when: provtype == 'ora'
+
+  - name: Create volume 
+    include_tasks: tasks/ntap_vol.yml 
+    vars: 
+      - vserver == "{{ vsmb }}"
+    when: provtype == 'smb'    
+
+  - name: Create volume 
+    include_tasks: tasks/ntap_vol.yml 
+    vars: 
+      - vserver == "{{ vnfs }}"
+    when: provtype == 'nfs'       
+
+  # if SAN 
+  - name: Create LUN(s)
+    include_tasks: tasks/ntap_lun.yml
+    when: 
+      - provtype == 'san'
+
 #  - name: Map LUN(s)
 #    include_tasks: tasks/ntap_lunmap.yml
 #    when: 

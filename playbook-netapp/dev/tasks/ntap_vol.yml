@@ -7,7 +7,7 @@
      name: "{{ volname }}"
      is_infinite: False
      aggregate_name: "{{ item.1 }}"
-     size: "{{ volsize * 1024 }}"
+     size: "{{ volsize }}"
      size_unit: mb
      space_guarantee: none
 #     efficiency_policy: "{{ deduppolicy }}"
@@ -25,9 +25,4 @@
     - "{{ ontap_facts.aggregate_info[item.0].aggr_space_attributes.percent_used_capacity | int }} < {{ maxpercentused }}"
     - result is not defined or result.rc != 0
     ignore_errors: yes
-
-#     initiator_group_name: "{{ item }}"
-#     state: "{{ state }}"
-#    with_items: "{{ igroups }}"
-#    register: result
 

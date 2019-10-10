@@ -1,0 +1,10 @@
+
+# vol options 
+is_infinite: False
+space_guarantee: none
+percent_snapshot_space: 0
+volume_security_style: unix
+
+# lun options 
+space_reserve: false
+space_allocation: false

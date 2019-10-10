@@ -1,5 +1,5 @@
 # User Input Template
-# 20191004 - romuald@redhat.com
+# 2019 - romuald@redhat.com
 #
 # If multiple objects need to be created, use the pattern [object1,object2,object3,...]  
 # Example: [vs04_cap1_st5400_o01,vs04_cap1_st5400_o02,vs04_cap1_st5400_o03]
@@ -12,30 +12,23 @@
 site: cap                                           # { cap, perex } 
 
 ## volume info
-volname: vs0[1,2]_[cap1,perex2]_prod_cifs_xx        # volname = name of the volume(s)
-qtreesize: 1                                        # size of the qtree if no qtree is given 
-qteename: qtrw                                      # if no qtree put ""
-sharename: monshare$                                # smb share name
+volname: vs04_cap1_[hostname]_o0x                   # volname = name of the volume(s)
+lunsize: 1                                          # lunsize = size(s) of the requested LUN 
+ostype: linux                                       # {linux, vmware, windows}
+
+## igroups
+igroups: vs04_ora_[hostname]                        # igroups = host ports allowed access
 
 ## storage disk class {sata, sas, ssd}
-disktype: sata                                      # {sata=bronze, sas=silver, ssd=gold} 
+disktype: sata                                      # {sas, sata, ssd} 
 #-------------------------------------------------------------------------------------------#
 
 
 #-------------------------------------------------------------------------------------------#
 # don't change/modify
-provtype: nas
-volsize: "{{ (qtreesize*1.2)|int}}"                 # volize  = volume size in gb
-juncpath: "{{ volname }}"                           # 
+provtype: ora
+volsize: "{{ (lunsize*1.2)|int}}"                   # volize  = volume size in gb
+lunname: "{{ volname }}.lun"                        # lunname = volname + .lun as a standard
 maxpercentused: 85
 #-------------------------------------------------------------------------------------------#
-
-
-
-
-
-
-
-
-
 

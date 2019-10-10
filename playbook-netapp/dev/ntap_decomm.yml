@@ -1,0 +1,83 @@
+#-------------------------------------------------------------------------------------------#
+# Ansible Playbook for NetApp cDOT
+# 2019 - romuald@redhat.com
+#
+# This is currently tested with:
+# - Ansible 2.8
+# - NetApp cDOT 9.6
+#
+#-------------------------------------------------------------------------------------------#
+# !!! THIS PLAYBOOK WILL DESTROY THE GIVEN VOLUME AND ALL OBJECTS UNDER IT (qtree, lun, ...)
+#-------------------------------------------------------------------------------------------#
+- hosts: localhost 
+  gather_facts: false
+  connection: local
+
+# vars:
+#   state: 'absent' 
+#
+# tasks:
+# - include_vars:
+#     dir: inputs
+#     files_matching: "{{ input }}.yml"
+# - include_vars:
+#     dir: vars
+#     files_matching: "{{ site }}.yml"
+#
+# - name: Gathering aggregate vfiler volume info
+#   include_tasks: tasks/ntap_facts.yml
+#
+# create volume 
+# - name: Create volume 
+#   include_tasks: tasks/ntap_vol.yml 
+#   vars: 
+#     vserver: "{{ vlun }}"
+#   when: provtype == 'san'
+#
+# - name: Create volume 
+#   include_tasks: tasks/ntap_vol.yml 
+#   vars: 
+#     vserver: "{{ vora }}"
+#   when: provtype == 'ora'
+#
+# - name: Create volume 
+#   include_tasks: tasks/ntap_vol.yml 
+#   vars: 
+#     vserver: "{{ vsmb }}"
+#   when: provtype == 'smb'    
+#
+# - name: Create volume 
+#   include_tasks: tasks/ntap_vol.yml 
+#   vars: 
+#     vserver: "{{ vnfs }}"
+#   when: provtype == 'nfs'       
+#
+# # if SAN 
+# - name: Create LUN(s)
+#   include_tasks: tasks/ntap_lun.yml
+#   when: provtype == 'san'
+
+#  - name: Map LUN(s)
+#    include_tasks: tasks/ntap_lunmap.yml
+#    when: 
+#      - provtype == 'san'
+#
+#  # if NAS
+#  - name: Create qtree
+#    include_tasks: tasks/ntap_qtree.yml
+#    when: 
+#      - qtreename  != ''
+#
+#  - name: Create smb share
+#    include_tasks: tasks/ntap_smb.yml
+#    when: 
+#      - provtype  == 'nas'
+#      - prototype == 'smb'
+#
+#  - name: Create nfs share
+#    include_tasks: tasks/ntap_smb.yml
+#    when: 
+#      - provtype  == 'nas'
+#      - prototype == 'nfs'
+#
+#

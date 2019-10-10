@@ -8,7 +8,7 @@
      flexvol_name: "{{ volname }}"
      ostype: "{{ ostype }}"
      size: "{{ lunsize }}"
-     size_unit: gb
+     size_unit: mb
      space_reserve: false
      space_allocation: false
      state: "{{ state }}"

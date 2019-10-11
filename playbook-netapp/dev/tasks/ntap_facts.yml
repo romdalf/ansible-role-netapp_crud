@@ -9,4 +9,4 @@
        - aggregate_info
        - vserver_info
        - volume_info
-
+       - igroup_info

@@ -31,8 +31,3 @@
 # TODO:
 # - if aggregate is not SSD run a routing to get all the dedup policy/avi_schedule
 #   and assign one 
-<<<<<<< HEAD
-# - dynamic volume_security_style
-
-=======
->>>>>>> dec3a5fc979738aa8275d7a83d5f0071cd27c95b

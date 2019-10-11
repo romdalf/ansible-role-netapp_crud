@@ -14,7 +14,7 @@ site: cap                                           # { cap, perex }
 ## volume info
 volname: vs0[1,2]_[cap1,perex2]_prod_cifs_xx        # volname = name of the volume(s)
 qtreesize: 1                                        # size of the qtree if no qtree is given 
-qteename: qtrw                                      # if no qtree put ""
+qtreename: qtrw                                      # if no qtree put ""
 sharename: monshare$                                # smb share name
 
 ## storage disk class {sata, sas, ssd}

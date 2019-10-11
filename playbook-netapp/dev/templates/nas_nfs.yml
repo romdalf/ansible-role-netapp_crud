@@ -14,7 +14,7 @@ site: cap                                           # { cap, perex }
 ## volume info
 volname: vs0[1,2]_[cap1,perex2]_prod_nfs_xx         # volname = name of the volume(s)
 qtreesize: 1                                        # lunsize = size(s) of the requested LUN 
-qteename: qtrw
+qtreename: qtrw
 exportclient: [157.164.70.11,157.164.70.10]         # igroups = host ports allowed access
 
 ## storage disk class {sata, sas, ssd}

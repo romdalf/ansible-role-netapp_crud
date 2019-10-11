@@ -1,0 +1,12 @@
+  - name: NTAP - qtree tasks
+    na_ontap_export_policy_rule:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     vserver: "{{ vserver }}"
+     name:  "{{ volname }}"
+     client_match: "{{ exportclient }}"
+     ro_rule: any
+     rw_rule: any 
+     protocol: nfs,nfs3,nfs4
+     state: "{{ state }}"

@@ -1,0 +1,8 @@
+  - name: NTAP - export policy tasks
+    na_ontap_export_policy:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     vserver: "{{ vlun }}"
+     name: "{{ volname }}"
+     state: "{{ state }}"

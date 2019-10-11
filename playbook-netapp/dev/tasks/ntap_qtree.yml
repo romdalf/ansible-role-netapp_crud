@@ -1,0 +1,9 @@
+  - name: NTAP - qtree tasks
+    na_ontap_qtree:
+     hostname: "{{ cluster }}"
+     username: "{{ user }}"
+     password: "{{ pass }}"
+     vserver: "{{ vserver }}"
+     name: "{{ qtreename }}"
+     flexvol_name: "{{ volname }}"
+     state: "{{ state }}"
